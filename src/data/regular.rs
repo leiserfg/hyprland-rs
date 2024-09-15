@@ -29,8 +29,10 @@ fn call_hyprctl_data_cmd(cmd: DataCommands) -> crate::Result<String> {
 /// This pub(crate) enum holds every socket command that returns data
 #[derive(Debug, Display, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum DataCommands {
-    #[display(fmt = "monitors all")]
+    #[display(fmt = "monitors")]
     Monitors,
+    #[display(fmt = "monitors all")]
+    AllMonitors,
     #[display(fmt = "workspaces")]
     Workspaces,
     #[display(fmt = "activeworkspace")]
@@ -151,6 +153,14 @@ create_data_struct!(
     command: DataCommands::Monitors,
     holding_type: Monitor,
     doc: "This struct holds a vector of monitors"
+);
+
+create_data_struct!(
+    vector,
+    name: AllMonitors,
+    command: DataCommands::AllMonitors,
+    holding_type: Monitor,
+    doc: "This struct holds a vector of all monitors, including disabled ones"
 );
 
 /// This struct holds information for a workspace
